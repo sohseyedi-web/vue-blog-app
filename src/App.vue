@@ -1,5 +1,8 @@
 <script setup>
 import Header from './components/ui/Header.vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 </script>
 
 <template>
@@ -8,4 +11,5 @@ import Header from './components/ui/Header.vue';
     <router-view />
   </main>
 </template>
+
 

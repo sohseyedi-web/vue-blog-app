@@ -1,34 +1,33 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-const useFormstore = defineStore('formStore', {
+const useFormStore = defineStore('formStore', {
     state: () => ({
-        items: ref([])
+        items: JSON.parse(localStorage.getItem('items')) || [],
     }),
 
     getters: {
-        getItems: (state) => state.items
+        getItems: (state) => state.items,
     },
 
     actions: {
         addItem(newItem) {
-            state.items.push(newItem)
-            localStorage.setItem('items', JSON.stringify(state.items))
+            this.items.push(newItem);
+            localStorage.setItem('items', JSON.stringify(this.items));
         },
 
         updateItem(updatedItem) {
-            const index = state.items.findIndex((form) => form.id === updatedItem.id)
+            const index = this.items.findIndex((form) => form.id === updatedItem.id);
             if (index !== -1) {
-                state.items[index] = updatedItem
-                localStorage.setItem('items', JSON.stringify(state.items))
+                this.items[index] = updatedItem;
+                localStorage.setItem('items', JSON.stringify(this.items));
             }
         },
 
         removeItem(id) {
-            state.items = state.items.filter((form) => form.id !== id)
-            localStorage.setItem('items', JSON.stringify(state.items))
-        }
-    }
-})
+            this.items = this.items.filter((form) => form.id !== id);
+            localStorage.setItem('items', JSON.stringify(this.items));
+        },
+    },
+});
 
-export default useFormstore
+export default useFormStore;

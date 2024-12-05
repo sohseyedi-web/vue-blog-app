@@ -7,7 +7,7 @@
     <section class="w-full my-5">
         <h5 class="text-xl font-bold text-emerald-500">همه بلاگ ها</h5>
         <div class="flex items-center flex-wrap lg:gap-6 gap-3 my-5 text-zinc-100">
-            <AppCard v-for="item in sortItems" :key="item.id" :item="item" class="lg:w-[32%] w-[95%] lg:mx-0 mx-auto"/>
+            <AppCard v-for="item in sortItems" :key="item.id" :item="item" class="lg:w-[32%] w-full lg:mx-0 mx-auto"/>
         </div>
     </section>
 </template>

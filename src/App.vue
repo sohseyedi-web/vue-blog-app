@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 
 <template>
   <Header/>
-  <main class="max-w-7xl mx-auto lg:px-0 px-5 py-5">
+  <main class="max-w-7xl mx-auto p-5">
     <router-view />
   </main>
 </template>

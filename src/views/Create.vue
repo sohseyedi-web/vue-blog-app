@@ -18,13 +18,14 @@ import AppInput from '../components/base/AppInput.vue';
 import { formData } from '../constant/initialFormValues';
 import useFormstore from '../store/useStore';
 import { useToast } from "vue-toastification";
+import { v4 as uuidv4 } from 'uuid';
 
 const {addItem} = useFormstore()
 const router = useRouter()
 const toast = useToast();
 
 const handleSubmit = () => {
-    const newItem = {...formData,createdAt:new Date().toISOString()}
+    const newItem = {id: uuidv4(),...formData,createdAt:new Date().toISOString()}
     console.log(newItem)
     addItem(newItem)
     toast.success("بلاگ ثبت شد")

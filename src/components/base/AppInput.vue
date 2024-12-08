@@ -34,7 +34,7 @@
 import { inject, ref } from 'vue';
 
 
-const {type = "text"} = defineProps(['error' , 'label' , 'fieldName','modelValue','placeHolder'])
+const {type = "text"} = defineProps(['error' , 'label' , 'fieldName','modelValue','placeHolder','long'])
 
 
 const model = defineModel()

@@ -15,6 +15,9 @@
     <div class="text-zinc-100">
         <h3 class="text-2xl font-bold mb-5">{{item.title}}</h3>
         <p class="text-lg leading-9">{{item.message}}</p>
+        <div  class="mt-5 flex items-center gap-x-3 text-emerald-500 font-semibold">
+            <span v-for="tag in item.tags" :key="tag">#{{ tag }}</span>
+        </div>
     </div>
 </template>
 

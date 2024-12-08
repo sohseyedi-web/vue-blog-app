@@ -4,7 +4,7 @@
             <img src="/defaultUser.png" alt="" class="lg:size-14 size-12 rounded-xl object-cover">
             <div class="text-zinc-100">
                 <h6 class="lg:text-xl text-lg font-semibold mb-2">{{ item.author }}</h6>
-                <span class="lg:text-base text-sm">{{ toTimeDifference(item.createdAt) }}</span>
+                <span class="lg:text-base text-sm">{{ toTimeDifference(String(item.createdAt)) }} پیش</span>
             </div>
         </div>
         <div class="flex items-center gap-x-2">
@@ -14,24 +14,25 @@
     </div>
     <div class="text-zinc-100">
         <h3 class="text-2xl font-bold mb-5">{{item.title}}</h3>
-        <p class="text-lg leading-9">{{item.message}}</p>
+        <p class="text-lg leading-9 break-words">{{item.message}}</p>
         <div  class="mt-5 flex items-center gap-x-3 text-emerald-500 font-semibold">
             <span v-for="tag in item.tags" :key="tag">#{{ tag }}</span>
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { useRoute } from 'vue-router'
 import useFormStore from '../store/useStore';
 import toTimeDifference from '../utils/toTimeDiff';
+import type { BlogItem } from '@/lib/types/BlogTypes';
 
 const route = useRoute()
 const {id} = route.params
 
 
 const {getItems} = useFormStore()
-const item = getItems.find((it) => it.id === id)
+const item = getItems.find((it) => it.id === id) as BlogItem
 
 </script>

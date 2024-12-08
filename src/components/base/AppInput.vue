@@ -30,14 +30,15 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { TextFieldType } from '@/lib/types/AppInputTypes';
 import { inject, ref } from 'vue';
 
 
-const {type = "text"} = defineProps(['error' , 'label' , 'fieldName','modelValue','placeHolder','long'])
+const {type = "text"} = defineProps<TextFieldType>()
 
 
-const model = defineModel()
+const model = defineModel<string>()
 const isTouched = ref(false)
 const isSubmitted = inject('isSubmitted',false)
 </script>

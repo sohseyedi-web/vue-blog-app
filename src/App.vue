@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Header from './components/ui/Header.vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,5 +11,3 @@ import 'swiper/css/pagination';
     <router-view />
   </main>
 </template>
-
-

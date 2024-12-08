@@ -1,9 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { inject, ref } from 'vue'
 import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from 'radix-vue'
 import { Icon } from '@iconify/vue'
 
-defineProps(['label',"fieldName","error"])
+defineProps<{
+  label : string,
+  fieldName : string,
+  error : string,
+}>()
 const model = defineModel()
 const tagValues = ref([])
 model.value = tagValues

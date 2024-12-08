@@ -15,13 +15,14 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppCard from '../components/base/AppCard.vue';
 import AppSection from '../components/base/AppSection.vue';
 import SwiperCard from '../components/home/SwiperCard.vue';
 import useFormStore from '../store/useStore';
 
-const {getItems} = useFormStore()
-const sortItems = getItems.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+const { getItems } = useFormStore();
+
+const sortItems = getItems.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
 </script>

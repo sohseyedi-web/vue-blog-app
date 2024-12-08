@@ -42,17 +42,18 @@
     </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
-import AppBtn from '../components/base/AppBtn.vue';
-import AppInput from '../components/base/AppInput.vue';
-import { formData } from '../constant/initialFormValues';
-import useFormstore from '../store/useStore';
+import AppBtn from '@/components/base/AppBtn.vue';
+import AppInput from '@/components/base/AppInput.vue';
+import { formData } from '@/constant/initialFormValues';
+import useFormstore from '@/store/useStore';
 import { useToast } from "vue-toastification";
 import { v4 as uuidv4 } from 'uuid';
-import useValid, { formSchema } from '../composables/useValid';
 import { provide, ref } from 'vue';
-import AppTagInput from '../components/base/AppTagInput.vue';
+import AppTagInput from '@/components/base/AppTagInput.vue';
+import type { BlogItem } from '@/lib/types/BlogTypes';
+import useValid , {formSchema} from '@/composables/useValid.ts';
 
 const {addItem} = useFormstore()
 const {values,errors,validateForm} = useValid(formData, formSchema)
@@ -64,8 +65,7 @@ const handleSubmit = () => {
     if(!validateForm()){
         isSubmitted.value = true
     }else{
-        const newItem = {id: uuidv4(),...formData,createdAt:new Date().toISOString()}
-        console.log(newItem)
+        const newItem : BlogItem = {id: uuidv4(),...formData,createdAt:new Date()}
         addItem(newItem)
         toast.success("بلاگ ثبت شد")
         setTimeout(() => {

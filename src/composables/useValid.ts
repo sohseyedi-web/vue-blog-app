@@ -1,14 +1,17 @@
-import { ref, watch } from "vue";
+import type { ZodTypeAny } from "zod";
+import { PERSIAN_ERROR, TEXT_ERROR } from "@/constant/schemaObject";
+import { ref, type Ref, watch } from "vue";
 import { z } from "zod";
-import { PERSIAN_ERROR, TEXT_ERROR } from "../constant/schemaObject";
 
-function useValid(initialValues, schema) {
-  const values = ref(initialValues);
-  const errors = ref({});
+function useValid<T extends ZodTypeAny>(initialValues: unknown, schema: T) {
+  type ZodForm = z.infer<T>;
+
+  const values = ref<ZodForm>(initialValues);
+  const errors = ref<Record<string, string>>({});
 
   watch(
     values,
-    (newValues) => {
+    (newValues: ZodForm) => {
       for (const fieldName of Object.keys(newValues)) {
         const field = fieldName;
         validateField(field);
@@ -18,12 +21,12 @@ function useValid(initialValues, schema) {
   );
 
   function validateForm() {
-    const res = schema.safeParse(values.value);
+    const res = schema.safeParse(values.value) as z.infer<T>;
     if (res.success) {
       errors.value = {};
       return true;
     } else {
-      const formErrors = {};
+      const formErrors: Record<string, string> = {};
       for (const [key, val] of Object.entries(
         res.error.formErrors.fieldErrors
       )) {
@@ -35,16 +38,18 @@ function useValid(initialValues, schema) {
     }
   }
 
-  function validateField(field) {
+  function validateField(field: keyof ZodForm) {
     try {
-      const res = schema.safeParse(values.value);
+      const res = schema.safeParse(values.value) as z.infer<T>;
       const error = res.success ? "" : res.error.formErrors.fieldErrors[field];
-      errors.value[field] = Array.isArray(error) ? error[0] : error || "";
+      errors.value[field as string] = Array.isArray(error)
+        ? error[0]
+        : error || "";
     } catch {}
   }
 
   return {
-    values,
+    values: values as Ref<ZodForm>,
     errors,
     validateField,
     validateForm,

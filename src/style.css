@@ -10,6 +10,18 @@
   font-family: Vazir, sans-serif;
 }
 
-body{
+body {
   background-color: #16161a;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #000;
+}
+::-webkit-scrollbar-thumb:vertical {
+  height: 20px;
+  background-color: #10b981;
 }

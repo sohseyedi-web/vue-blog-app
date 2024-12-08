@@ -1,8 +1,9 @@
-import { reactive } from "vue"
+import { reactive } from "vue";
 
 export const formData = reactive({
-    title: '',
-    author: '',
-    subject: '',
-    message: ''
-})
+  title: "",
+  author: "",
+  subject: "",
+  message: "",
+  tags: [""],
+});
